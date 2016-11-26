@@ -22,6 +22,7 @@ gem 'hanami-model', '<%= config[:hanami_model_version] %>'
 
 gem '<%= config[:database_config][:gem] %>'
 <%- end -%>
+<%- unless config[:api] -%>
 <%- case config[:template] -%>
 <%- when 'slim' -%>
 
@@ -29,6 +30,7 @@ gem 'slim'
 <%- when 'haml' -%>
 
 gem 'haml'
+<%- end -%>
 <%- end -%>
 
 <%- unless Hanami::Utils.jruby? -%>

@@ -27,17 +27,21 @@ module Hanami
         def map_templates
           add_mapping('application.rb.tt', 'application.rb')
           add_mapping('config/routes.rb.tt', 'config/routes.rb')
-          add_mapping('views/application_layout.rb.tt', 'views/application_layout.rb')
-          add_mapping("templates/application.html.#{ template_engine.name }.tt", "templates/application.html.#{ template_engine.name }")
-          add_mapping('favicon.ico', 'assets/favicon.ico')
+          unless api?
+            add_mapping('views/application_layout.rb.tt', 'views/application_layout.rb')
+            add_mapping("templates/application.html.#{ template_engine.name }.tt", "templates/application.html.#{ template_engine.name }")
+            add_mapping('favicon.ico', 'assets/favicon.ico')
+          end
 
           add_mapping('.gitkeep', 'controllers/.gitkeep')
-          add_mapping('.gitkeep', 'assets/images/.gitkeep')
-          add_mapping('.gitkeep', 'assets/javascripts/.gitkeep')
-          add_mapping('.gitkeep', 'assets/stylesheets/.gitkeep')
+          unless api?
+            add_mapping('.gitkeep', 'assets/images/.gitkeep')
+            add_mapping('.gitkeep', 'assets/javascripts/.gitkeep')
+            add_mapping('.gitkeep', 'assets/stylesheets/.gitkeep')
+          end
           add_mapping('.gitkeep', "../../spec/#{ app_name }/features/.gitkeep")
           add_mapping('.gitkeep', "../../spec/#{ app_name }/controllers/.gitkeep")
-          add_mapping('.gitkeep', "../../spec/#{ app_name }/views/.gitkeep")
+          add_mapping('.gitkeep', "../../spec/#{ app_name }/views/.gitkeep") unless api?
         end
 
         def template_options

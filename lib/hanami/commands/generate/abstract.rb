@@ -31,6 +31,12 @@ module Hanami
 
         private
 
+        def api?
+          p hanamirc_options
+          puts 'ASDASD'
+          hanamirc_options.fetch(:api, false) || options.fetch(:api, false)
+        end
+
         def test_framework
           @test_framework ||= Hanami::Generators::TestFramework.new(hanamirc, options[:test])
         end

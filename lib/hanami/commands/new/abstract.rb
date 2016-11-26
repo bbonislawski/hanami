@@ -18,7 +18,7 @@ module Hanami
         DEFAULT_APPLICATION_BASE_URL = '/'.freeze
 
         attr_reader :options, :target_path, :database_config,
-          :test_framework, :hanami_model_version, :template_engine
+          :test_framework, :hanami_model_version, :template_engine, :api
 
         def initialize(options, name)
           @options = Hanami::Utils::Hash.new(options).symbolize!
@@ -100,6 +100,10 @@ module Hanami
 
         def hanami_head?
           options.fetch(:hanami_head, false)
+        end
+
+        def api?
+          options.fetch(:api, false)
         end
 
         def code_reloading?

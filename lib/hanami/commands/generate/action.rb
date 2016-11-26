@@ -89,13 +89,15 @@ module Hanami
         def map_templates
           add_mapping("action_spec.#{test_framework.framework}.tt", action_spec_path)
 
-          if skip_view?
+          if skip_view? || api?
             add_mapping('action_without_view.rb.tt', action_path)
           else
             add_mapping('action.rb.tt', action_path)
-            add_mapping('view.rb.tt', view_path)
-            add_mapping('template.tt', template_path)
-            add_mapping("view_spec.#{test_framework.framework}.tt", view_spec_path)
+            unless api?
+              add_mapping('view.rb.tt', view_path)
+              add_mapping('template.tt', template_path)
+              add_mapping("view_spec.#{test_framework.framework}.tt", view_spec_path)
+            end
           end
         end
 
@@ -133,7 +135,8 @@ module Hanami
         end
 
         def skip_view?
-          options.fetch(:skip_view, false)
+          puts 'dupa'
+          options.fetch(:skip_view, false) ||  hanamirc_options.fetch(:api, false)
         end
 
         # @since 0.5.0

@@ -18,6 +18,7 @@ module Hanami
 
         def template_options
           {
+            api:                  api?,
             project_name:         project_name,
             hanami_head:          hanami_head?,
             code_reloading:       code_reloading?,
@@ -86,7 +87,8 @@ module Hanami
 
         def app_options
           {
-            application_base_url: application_base_url
+            application_base_url: application_base_url,
+            api: api?
           }
         end
 

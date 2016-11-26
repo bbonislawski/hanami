@@ -104,6 +104,7 @@ $ > hanami new fancy_app --hanami-head=true
     method_option :test, desc: "Project test framework (#{Hanami::Generators::TestFramework::VALID_FRAMEWORKS.join('/')})", default: Hanami::Hanamirc::DEFAULT_TEST_SUITE
     method_option :hanami_head, desc: 'Use hanami HEAD (true/false)', type: :boolean, default: false
     method_option :help, desc: 'Displays the usage method'
+    method_option :api, type: :boolean, default: false, desc: 'Generates application without assets and template engine'
     def new(application_name=nil)
       if options[:help]
         invoke :help, ['new']

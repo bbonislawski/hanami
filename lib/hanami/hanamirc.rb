@@ -37,6 +37,15 @@ module Hanami
     # @see Hanami::Hanamirc#default_options
     ARCHITECTURE_KEY = 'architecture'.freeze
 
+    # Api options for writing the hanamirc file
+    #
+    # @since 0.9.1
+    # @api private
+    #
+    # @see Hanami::Hanamirc#default_options TODO
+    #
+    API_KEY = 'api'.freeze
+
     # Project name for writing the hanamirc file
     #
     # @since 0.8.0

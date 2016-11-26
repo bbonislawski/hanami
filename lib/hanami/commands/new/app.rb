@@ -19,6 +19,7 @@ module Hanami
 
         def template_options
           {
+            api:                  api?,
             app_name:             app_name,
             upcase_app_name:      upcase_app_name,
             classified_app_name:  classified_app_name,
@@ -49,8 +50,10 @@ module Hanami
           add_mapping('lib/app_name.rb.tt', "lib/#{ app_name }.rb")
           add_mapping('config/application.rb.tt', 'config/application.rb')
           add_mapping('config/routes.rb.tt', 'config/routes.rb')
-          add_mapping('views/application_layout.rb.tt', 'app/views/application_layout.rb')
-          add_mapping("templates/application.html.#{ template_engine.name }.tt", "app/templates/application.html.#{ template_engine.name }")
+          unless api
+            add_mapping('views/application_layout.rb.tt', 'app/views/application_layout.rb')
+            add_mapping("templates/application.html.#{ template_engine.name }.tt", "app/templates/application.html.#{ template_engine.name }")
+          end
           add_mapping('favicon.ico', 'app/assets/favicon.ico')
         end
 
@@ -71,10 +74,12 @@ module Hanami
         def add_empty_directories
           add_mapping('.gitkeep', 'config/initializers/.gitkeep')
           add_mapping('.gitkeep', 'app/controllers/.gitkeep')
-          add_mapping('.gitkeep', 'app/views/.gitkeep')
-          add_mapping('.gitkeep', 'app/assets/images/.gitkeep')
-          add_mapping('.gitkeep', 'app/assets/javascripts/.gitkeep')
-          add_mapping('.gitkeep', 'app/assets/stylesheets/.gitkeep')
+          unless api
+            add_mapping('.gitkeep', 'app/views/.gitkeep')
+            add_mapping('.gitkeep', 'app/assets/images/.gitkeep')
+            add_mapping('.gitkeep', 'app/assets/javascripts/.gitkeep')
+            add_mapping('.gitkeep', 'app/assets/stylesheets/.gitkeep')
+          end
           add_mapping('.gitkeep', "lib/#{ app_name }/entities/.gitkeep")
           add_mapping('.gitkeep', "lib/#{ app_name }/repositories/.gitkeep")
           add_mapping('.gitkeep', "lib/#{ app_name }/mailers/.gitkeep")
